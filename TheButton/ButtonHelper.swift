@@ -4,6 +4,9 @@
 //
 //  Created by Max Liu on 7/15/26.
 //
+import SwiftUI
+
+let overlayManager = OverlayManager()
 
 let basicActions: [() -> Void] = [
     basic1,
@@ -36,4 +39,5 @@ func basic2() -> Void {
 }
 func rare1() -> Void {
     print("HUGE WIN")
+    overlayManager.trigger(.balloons, duration: 4.0)
 }
