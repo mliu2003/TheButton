@@ -19,15 +19,16 @@ struct ContentView: View {
                 Text("TOTAL PRESSES: \(totalPresses)").fontWeight(.bold)
                 
                 Spacer()
+                Text(": \(rollText)").fontWeight(.bold)
                 ZStack {
                     Circle()
-                        .fill(Color.red)
+                        .fill(buttonColor)
                         .brightness(-0.3)
-                        .frame(width: 160, height: 160)
+                        .frame(width: buttonRadius, height: buttonRadius)
                         .offset(y: 12)
                     Circle()
-                        .fill(Color.red)
-                        .frame(width: 160, height: 160)
+                        .fill(buttonColor)
+                        .frame(width: buttonRadius, height: buttonRadius)
                         .offset(y: isPressed ? 10 : 0)
                         .shadow(
                             color: Color.black.opacity(isPressed ? 0.1 : 0.3),

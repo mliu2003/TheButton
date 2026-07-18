@@ -8,36 +8,54 @@ import SwiftUI
 
 let overlayManager = OverlayManager()
 
-let basicActions: [() -> Void] = [
+let basicActions: [() -> String] = [
     basic1,
     basic2
 ]
-let rareActions: [() -> Void] = [
-    rare1
+let rareActions: [() -> String] = [
+    rare1,
+    rare2
+]
+let legendaryActions: [() -> String] = [
+    legendary1
 ]
 
 func onPress() {
-    let roll = Double.random(in: 0..<100) // Returns a value like 42.7 or 91.3
-        
-    if roll < 90 {
-        getResult(actions: basicActions)()
+    let roll = Double.random(in: 0..<100)
+    var result = ""
+    if roll < 80 {
+        result = getResult(actions: basicActions)()
+    } else if roll < 90 {
+        result = getResult(actions: rareActions)()
     } else {
-        getResult(actions: rareActions)()
+        result = getResult(actions: legendaryActions)()
     }
+    print(result)
+    rollText = result
 }
 
-func getResult(actions: [() -> Void]) -> () -> Void {
+func getResult(actions: [() -> String]) -> () -> String {
     let random = Int.random(in: 0..<actions.count)
     return actions[random]
 }
 
-func basic1() -> Void {
-    print("basic 1")
+func basic1() -> String {
+    return "basic 1"
 }
-func basic2() -> Void {
-    print("basic 2")
+func basic2() -> String {
+    return "basic 2"
 }
-func rare1() -> Void {
-    print("HUGE WIN")
+func rare1() -> String {
+    buttonColor = (buttonColor == Color.red ? Color.blue : Color.red)
+    return "rare find 1"
+}
+
+func rare2() -> String {
+    buttonRadius += 20.0
+    return "rare find 2"
+}
+
+func legendary1() -> String {
     overlayManager.trigger(.balloons, duration: 4.0)
+    return "LEGENDARY WIN"
 }
