@@ -19,7 +19,7 @@ struct ContentView: View {
                 Text("TOTAL PRESSES: \(totalPresses)").fontWeight(.bold)
                 
                 Spacer()
-                Text(": \(rollText)").fontWeight(.bold)
+                Text("\(rollText)").fontWeight(.bold)
                 ZStack {
                     Circle()
                         .fill(buttonColor)

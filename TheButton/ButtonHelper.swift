@@ -5,19 +5,38 @@
 //  Created by Max Liu on 7/15/26.
 //
 import SwiftUI
+import AVFAudio
+
+class SoundManager {
+    var player: AVAudioPlayer?
+    
+    func play(soundName: String, type: String = "mp3") {
+        if let url = Bundle.main.url(forResource: soundName, withExtension: type) {
+            do {
+                player = try AVAudioPlayer(contentsOf: url)
+                player?.play()
+            } catch {
+                print("Error loading sound file: \(error.localizedDescription)")
+            }
+        }
+    }
+}
 
 let overlayManager = OverlayManager()
+let soundManager = SoundManager()
+
+var stats: [String: Int] = [:]
 
 let basicActions: [() -> String] = [
-    basic1,
-    basic2
+    pop,
+    nothing
 ]
 let rareActions: [() -> String] = [
-    rare1,
-    rare2
+    redblue,
+    grow
 ]
 let legendaryActions: [() -> String] = [
-    legendary1
+    balloons
 ]
 
 func onPress() {
@@ -30,7 +49,10 @@ func onPress() {
     } else {
         result = getResult(actions: legendaryActions)()
     }
+    
+    stats[result, default: 0] += 1
     print(result)
+    print (stats)
     rollText = result
 }
 
@@ -39,23 +61,27 @@ func getResult(actions: [() -> String]) -> () -> String {
     return actions[random]
 }
 
-func basic1() -> String {
-    return "basic 1"
+// Basic
+func pop() -> String {
+    soundManager.play(soundName: "pop", type: "wav")
+    return "pop"
 }
-func basic2() -> String {
-    return "basic 2"
+
+func nothing() -> String {
+    return "nothing"
 }
-func rare1() -> String {
+
+func redblue() -> String {
     buttonColor = (buttonColor == Color.red ? Color.blue : Color.red)
-    return "rare find 1"
+    return "red blue"
 }
 
-func rare2() -> String {
+func grow() -> String {
     buttonRadius += 20.0
-    return "rare find 2"
+    return "grow"
 }
 
-func legendary1() -> String {
+func balloons() -> String {
     overlayManager.trigger(.balloons, duration: 4.0)
-    return "LEGENDARY WIN"
+    return "balloons"
 }
