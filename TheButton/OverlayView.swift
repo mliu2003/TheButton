@@ -8,19 +8,18 @@
 import SwiftUI
 
 struct OverlayView: View {
-    // Bind to the shared state manager
     var manager: OverlayManager
     
     var body: some View {
         Group {
             switch manager.activeEffect {
                 case .none:
-                    EmptyView() // Renders nothing, uses zero layout space
+                    EmptyView()
                     
                 case .balloons:
-                BalloonView().transition(.opacity)
+                    BalloonView().transition(.opacity)
             }
         }
-        .allowsHitTesting(false) // Ensures users can tap through animations to keep playing
+        .allowsHitTesting(false)
     }
 }

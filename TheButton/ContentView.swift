@@ -53,6 +53,9 @@ struct ContentView: View {
             }
         }
         .overlay(
+            PermanentOverlayView(manager: overlayManager)
+        )
+        .overlay(
             OverlayView(manager: overlayManager)
         )
     }

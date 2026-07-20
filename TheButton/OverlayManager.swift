@@ -12,9 +12,16 @@ enum OverlayEffect {
     case balloons
 }
 
+enum PermanentAddition: String, CaseIterable {
+    case trophy = "🏆"
+    case present = "🎁"
+}
+
 @Observable
 class OverlayManager {
     var activeEffect: OverlayEffect = .none
+    
+    var permanentAdditions: [PermanentAddition] = []
     
     func trigger(_ effect: OverlayEffect, duration: Double = 5.0) {
         activeEffect = effect
@@ -27,5 +34,9 @@ class OverlayManager {
                 }
             }
         }
+    }
+    
+    func permanentAdd(_ addition: PermanentAddition) {
+        permanentAdditions.append(addition)
     }
 }

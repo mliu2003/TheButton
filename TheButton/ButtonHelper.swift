@@ -36,7 +36,8 @@ let rareActions: [() -> String] = [
     grow
 ]
 let legendaryActions: [() -> String] = [
-    balloons
+    balloons,
+    trophy
 ]
 
 func onPress() {
@@ -84,4 +85,9 @@ func grow() -> String {
 func balloons() -> String {
     overlayManager.trigger(.balloons, duration: 4.0)
     return "balloons"
+}
+
+func trophy() -> String {
+    overlayManager.permanentAdd(PermanentAddition.trophy)
+    return "trophy"
 }
